@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "jest": "jest"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.6",
@@ -17,21 +20,30 @@
     "@tanstack/react-form": "^0.26.4",
     "@tanstack/react-query": "^5.51.18",
     "axios": "^1.7.3",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.24.7",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "axios-mock-adapter": "^1.22.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "ts-jest": "^29.2.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
   },
-  "proxy": "https://cors-anywhere.herokuapp.com/https://live.devnimble.com"
+  "proxy": "https://live.devnimble.com"
 }

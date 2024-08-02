@@ -23,7 +23,7 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
     mutationFn: (id: string) => deleteContact(id),
     onSuccess: (response) => {
       client.invalidateQueries({ queryKey: ["contacts"] });
-      setSnackMessage(`${response?.data.ids} deleted`)
+      setSnackMessage(`${response?.data.ids} deleted`);
     },
   });
 
@@ -34,6 +34,7 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
   const handleDelete = async (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>
   ) => {
+    console.log("first")
     e.stopPropagation();
     e.preventDefault();
     try {
@@ -77,6 +78,7 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
           ))}
         </Stack>
         <HighlightOffIcon
+          data-testid="card-delete-button"
           onClick={(e) => handleDelete(e)}
           sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 10 }}
         />

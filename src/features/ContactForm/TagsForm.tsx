@@ -7,7 +7,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const TagsForm = ({ id }: { id: string }) => {
   const client = useQueryClient();
   const { mutate: update } = useMutation({
-    mutationFn: ({ id, tags }: { id: string; tags: string[] }) => updateContact(id, tags),
+    mutationFn: ({ id, tags }: { id: string; tags: string[] }) =>
+      updateContact(id, tags),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["contact"] });
     },
@@ -32,6 +33,7 @@ export const TagsForm = ({ id }: { id: string }) => {
         Add tags
       </Typography>
       <form
+        data-testid="tags-test-form"
         onSubmit={async (e) => {
           e.preventDefault();
           e.stopPropagation();

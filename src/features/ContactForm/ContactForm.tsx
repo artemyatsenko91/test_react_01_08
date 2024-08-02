@@ -4,6 +4,7 @@ import { Input } from "./components/Input";
 import { createContact } from "../../services/contacts";
 import { returnContactData } from "../../utils/returnContactData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { validateEmail } from "../../utils/validation";
 
 export const ContactForm = () => {
   const client = useQueryClient();
@@ -43,6 +44,7 @@ export const ContactForm = () => {
           form.reset();
         }}
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+        data-testid="test-form"
       >
         <form.Field
           name="firstName"
@@ -100,10 +102,9 @@ export const ContactForm = () => {
           name="email"
           validators={{
             onChange: ({ value }) => {
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
               return !value
                 ? "Email is required"
-                : !emailRegex.test(value)
+                : !validateEmail(value)
                 ? "Invalid email address"
                 : undefined;
             },
@@ -126,7 +127,12 @@ export const ContactForm = () => {
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
-            <Button variant="contained" type="submit" disabled={!canSubmit}>
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!canSubmit}
+              data-testid="test-form-btn"
+            >
               {isSubmitting ? "Sending..." : "Add Contact"}
             </Button>
           )}
