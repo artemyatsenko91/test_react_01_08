@@ -8,7 +8,16 @@ export const ContactInfo: React.FC<IContactInfoProps> = ({
 }) => {
   return (
     <Stack>
-      <Stack direction="row" sx={{ gap: "10px" }}>
+      <Stack
+        sx={{
+          display: "flex",
+          gap: "10px",
+          flexDirection: {
+            md: "column",
+            lg: "row",
+          },
+        }}
+      >
         <Typography>
           First name:{" "}
           <strong>{data["first name"] && data["first name"][0].value}</strong>
@@ -21,7 +30,7 @@ export const ContactInfo: React.FC<IContactInfoProps> = ({
       <Typography>
         Email:{" "}
         {ignoreLink ? (
-          data.email[0].value
+          data.email && data.email[0].value
         ) : (
           <Link to={`mailto:${data.email && data.email[0].value}`}>
             {data.email[0].value}

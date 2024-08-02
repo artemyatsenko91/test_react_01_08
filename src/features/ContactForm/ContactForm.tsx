@@ -31,7 +31,14 @@ export const ContactForm = () => {
     <Stack
       direction="column"
       gap={2}
-      sx={{ position: "sticky", top: "20px", height: "max-content" }}
+      sx={{
+        position: {
+          sm: "relative",
+          md: "sticky",
+        },
+        top: "20px",
+        height: "max-content",
+      }}
     >
       <Typography variant="subtitle1" sx={{ fontSize: "24px" }}>
         Create Contact

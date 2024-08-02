@@ -4,17 +4,13 @@ import { ContactsList } from "../features/ContactsList/ContactsList";
 
 export const HomePage = () => {
   return (
-    <Container
-      sx={{
-        "&.MuiContainer-root": {
-          maxWidth: "1280px",
-        },
-      }}
-    >
+    <Container>
       <Stack
         sx={{
-          display: "grid",
-          gridTemplateColumns: "280px 1fr",
+          display: { sm: "flex", md: "grid" },
+          gridTemplateColumns: {
+            md: "minmax(max-content, 280px) 1fr",
+          },
           gap: "38px",
           padding: "40px 0",
         }}

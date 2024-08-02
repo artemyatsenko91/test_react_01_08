@@ -34,7 +34,6 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
   const handleDelete = async (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>
   ) => {
-    console.log("first")
     e.stopPropagation();
     e.preventDefault();
     try {
@@ -52,8 +51,11 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
       ref={cardRef}
       sx={{
         position: "relative",
-        display: "grid",
-        gridTemplateColumns: "200px 1fr",
+        display: "flex",
+        gridTemplateColumns: {
+          sm: "100px 1fr",
+          md: "200px 1fr",
+        },
         border: "1px solid black",
         boxShadow: "none",
 
@@ -66,19 +68,21 @@ export const ContactCard: React.FC<IContactCardProps> = ({ data }) => {
       data-id={data.id}
     >
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 140, width: 200 }}
         image={data.avatar_url}
         title="green iguana"
       />
-      <CardContent>
+      <CardContent
+        sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
+      >
         <ContactInfo data={data.fields} ignoreLink />
-        <Stack direction="row" sx={{ gap: "10px" }}>
+        <Stack direction="row" sx={{ gap: "10px", flexWrap: "wrap" }}>
           {data.tags.map((item) => (
             <Chip label={item.tag} key={item.id} />
           ))}
         </Stack>
         <HighlightOffIcon
-          data-testid="card-delete-button"
+          data-test-id="card-delete-button"
           onClick={(e) => handleDelete(e)}
           sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 10 }}
         />
