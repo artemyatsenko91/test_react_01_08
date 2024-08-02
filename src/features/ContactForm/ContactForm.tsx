@@ -3,8 +3,18 @@ import { useForm } from "@tanstack/react-form";
 import { Input } from "./components/Input";
 import { createContact } from "../../services/contacts";
 import { returnContactData } from "../../utils/returnContactData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const ContactForm = () => {
+  const client = useQueryClient();
+
+  const { mutate: create } = useMutation({
+    mutationFn: createContact,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["contacts"] });
+    },
+  });
+
   const form = useForm({
     defaultValues: {
       firstName: "",
@@ -13,13 +23,15 @@ export const ContactForm = () => {
     },
     onSubmit: async ({ value }) => {
       const data = returnContactData(value);
-      const response = await createContact(data);
-
-      console.log(response);
+      create(data);
     },
   });
   return (
-    <Stack direction="column" gap={2} sx={{ position: "sticky", top: "0" }}>
+    <Stack
+      direction="column"
+      gap={2}
+      sx={{ position: "sticky", top: "20px", height: "max-content" }}
+    >
       <Typography variant="subtitle1" sx={{ fontSize: "24px" }}>
         Create Contact
       </Typography>
@@ -115,7 +127,7 @@ export const ContactForm = () => {
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
             <Button variant="contained" type="submit" disabled={!canSubmit}>
-              {isSubmitting ? "..." : "Add Contact"}
+              {isSubmitting ? "Sending..." : "Add Contact"}
             </Button>
           )}
         />

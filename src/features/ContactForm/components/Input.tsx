@@ -12,7 +12,7 @@ export const Input: React.FC<IInputProps> = ({ field }) => {
   return (
     <Stack direction="column">
       <TextField
-        label="First Name"
+        label={field.name.charAt(0).toUpperCase() + field.name.slice(1)}
         id={field.name}
         name={field.name}
         value={field.state.value}
